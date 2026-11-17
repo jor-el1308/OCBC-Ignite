@@ -27,17 +27,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderStepper(document.getElementById("stepper"), 2);
   renderLoading(root);
 
-  // Su Yi's feature: trusted contacts skip screening
-  if (ExclusionLog.isExcluded(tx.payee)) {
-    completeTransfer(tx, {
-      level: "low",
-      score: 0,
-      reasons: ["Payee is in your exclusion log, so OneCheck was skipped."],
-      skipped: true
-    });
-    return;
-  }
-
   let result;
   try {
     // small delay so the "checking…" screen is visible during the demo

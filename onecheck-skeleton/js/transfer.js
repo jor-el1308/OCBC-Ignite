@@ -180,6 +180,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     Store.set("pendingTx", tx);
+    if (window.ExclusionLog && ExclusionLog.canFastLane(tx)) {
+      if (!window.confirm("SafePay Circle fast lane: Transfer S$" + amount.toFixed(2) + " to " + payee.name + "? Please verify the recipient details before proceeding.")) { Store.remove("pendingTx"); return; }
+      completeTransfer(tx, { level: "skipped", skipped: true, fastLane: true, reasons: ["SafePay Circle eligible recipient"] });
+      return;
+    }
     window.location.href = "onecheck.html";
   });
 
