@@ -153,6 +153,13 @@ function renderStepper(el, current) {
    Deducts the balance, updates payee history, adds to recent list,
    stores lastTx and goes to complete.html */
 function completeTransfer(tx, riskResult) {
+  if (!tx || !tx.id || !Number.isFinite(tx.amount) || tx.amount <= 0) return;
+  const done = Store.get("completedTxIds", []);
+  if (done.includes(tx.id)) { showToast("This transfer was already completed."); return; }
+  const source = getAccounts().find(a => a.id === tx.fromAccountId);
+  if (!source || tx.amount > source.balance || tx.amount > window.DEMO_DATA.user.dailyTransferLimit) { showToast("Transfer could not be completed. Please check your balance and limit."); return; }
+  done.push(tx.id);
+  Store.set("completedTxIds", done);
   const today = new Date().toISOString().slice(0, 10);
 
   const accounts = getAccounts();
@@ -209,7 +216,7 @@ function renderChrome() {
     { id: "home", href: "index.html", label: "Overview" },
     { id: "transfer", href: "transfer.html", label: "Pay &amp; transfer" },
     { id: "trusted", href: "trusted-person.html", label: "Trusted person" },
-    { id: "exclusion", href: "exclusion-log.html", label: "Exclusion log" }
+    { id: "exclusion", href: "exclusion-log.html", label: "SafePay Circle" }
   ];
   const nav = links
     .map((l) => `<a href="${l.href}" class="${l.id === page ? "active" : ""}"${l.id === page ? ' aria-current="page"' : ""}>${l.label}</a>`)

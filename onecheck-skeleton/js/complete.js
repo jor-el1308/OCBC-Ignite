@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const risk = tx.risk;
   const riskRow = risk
     ? `<div><dt>OneCheck result</dt><dd>${risk.skipped
-        ? `<span class="badge low">Skipped</span> <span class="muted small">exclusion log</span>`
+        ? `<span class="badge low">Skipped</span> <span class="muted small">SafePay Circle fast lane</span>`
         : `<span class="badge ${escapeHtml(risk.level)}">${escapeHtml(risk.level)} risk</span>`}</dd></div>`
     : "";
   const toLine = tx.channel === "PayNow"

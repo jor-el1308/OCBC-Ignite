@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <li>${icon("user")}<div><strong>Trusted person</strong><br>
       ${person ? `<span class="status-ok">${escapeHtml(person.name)}</span>` : `<span class="status-off">Not set up</span>`}
       · <a href="trusted-person.html">${person ? "Manage" : "Set up"}</a></div></li>
-    <li>${icon("list")}<div><strong>Exclusion log</strong><br>
+    <li>${icon("list")}<div><strong>SafePay Circle</strong><br>
       <span class="muted">${excluded.length} trusted contact${excluded.length === 1 ? "" : "s"}</span>
       · <a href="exclusion-log.html">Manage</a></div></li>`;
 
