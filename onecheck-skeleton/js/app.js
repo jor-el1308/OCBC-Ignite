@@ -49,7 +49,19 @@ const Store = {
 /* ---------- Data accessors ---------- */
 function clone(obj) { return JSON.parse(JSON.stringify(obj)); }
 function getAccounts() { return Store.get("accounts", clone(window.DEMO_DATA.accounts)); }
-function getPayees() { return Store.get("payees", clone(window.DEMO_DATA.payees)); }
+function getPayees() {
+  const payees = Store.get('payees', clone(window.DEMO_DATA.payees));
+  let changed = false;
+  payees.forEach(function(p) {
+    const demo = window.DEMO_DATA.payees.find(function(d) { return d.id === p.id && d.number === p.number && d.bank === p.bank; });
+    if (!Array.isArray(p.transferDates) && demo && Array.isArray(demo.transferDates)) {
+      p.transferDates = demo.transferDates.slice();
+      changed = true;
+    }
+  });
+  if (changed) Store.set('payees', payees);
+  return payees;
+}
 function getRecentTransactions() { return Store.get("recent", clone(window.DEMO_DATA.recentTransactions)); }
 
 /* ---------- Formatting ---------- */
@@ -175,6 +187,9 @@ function completeTransfer(tx, riskResult) {
     payees.push(saved);
   }
   saved.pastTransfers = (saved.pastTransfers || 0) + 1;
+  saved.transferDates = Array.isArray(saved.transferDates) ? saved.transferDates : [];
+  saved.transferDates.push(today);
+  saved.transferDates = saved.transferDates.filter(function(d) { return Number.isFinite(Date.parse(d)) && Date.parse(d) >= Date.now() - 30 * 86400000; });
   saved.lastPaid = today;
   saved.isNew = false;
   Store.set("payees", payees);

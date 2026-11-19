@@ -29,11 +29,11 @@ window.DEMO_DATA = {
   //   pastTransfers – how many times the user has paid them (useful for OneCheck)
   //   addedOn       – when the payee was added (recently added payees are riskier)
   payees: [
-    { id: "p-001", name: "Mum (Tan Mei Ling)",       bank: "DemoBank",            number: "501-222333-001", isNew: false, pastTransfers: 24, lastPaid: "2026-11-02", addedOn: "2023-02-11" },
-    { id: "p-002", name: "Sunrise Property Pte Ltd", bank: "DemoBank",            number: "601-445566-002", isNew: false, pastTransfers: 11, lastPaid: "2026-10-28", addedOn: "2025-12-01" },
-    { id: "p-003", name: "Lim Wei Jie",              bank: "UOB",                 number: "012-345678-9",   isNew: true,  pastTransfers: 0,  lastPaid: null,         addedOn: "2026-11-04" },
-    { id: "p-004", name: "Quick Crypto Invest",      bank: "Other bank",          number: "999-000111-2",   isNew: true,  pastTransfers: 0,  lastPaid: null,         addedOn: "2026-11-05" },
-    { id: "p-005", name: "Sarah Ng",                 bank: "DBS/POSB",            number: "120-55678-1",    isNew: false, pastTransfers: 6,  lastPaid: "2026-10-12", addedOn: "2024-07-19" }
+    { id: "p-001", name: "Mum (Tan Mei Ling)",       bank: "DemoBank",            number: "501-222333-001", isNew: false, pastTransfers: 24, lastPaid: "2026-11-02", addedOn: "2023-02-11", transferDates: ["2026-10-20","2026-10-26","2026-11-02"] },
+    { id: "p-002", name: "Sunrise Property Pte Ltd", bank: "DemoBank",            number: "601-445566-002", isNew: false, pastTransfers: 11, lastPaid: "2026-10-28", addedOn: "2025-12-01", transferDates: ["2026-10-17","2026-10-22","2026-10-28"] },
+    { id: "p-003", name: "Lim Wei Jie",              bank: "UOB",                 number: "012-345678-9",   isNew: true,  pastTransfers: 0,  lastPaid: null,         addedOn: "2026-11-04", transferDates: [] },
+    { id: "p-004", name: "Quick Crypto Invest",      bank: "Other bank",          number: "999-000111-2",   isNew: true,  pastTransfers: 0,  lastPaid: null,         addedOn: "2026-11-05", transferDates: [] },
+    { id: "p-005", name: "Sarah Ng",                 bank: "DBS/POSB",            number: "120-55678-1",    isNew: false, pastTransfers: 6,  lastPaid: "2026-10-12", addedOn: "2024-07-19", transferDates: ["2026-09-15","2026-09-28","2026-10-12"] }
   ],
 
   // Fake PayNow directory: mobile number -> registered name (masked like real PayNow)
